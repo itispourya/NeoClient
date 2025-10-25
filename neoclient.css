@@ -1,0 +1,1575 @@
+/**
+ * NeoClient v1.1.1 User Interface
+ * Powered by NeoNotion.net
+ */
+:root {
+    --bg-color: #0a1e3a;
+    --text-color: #d6e6ff;
+    --heading-color: #ff1e00;
+    --button-bg: #2a3b5a;
+    --button-text: #ffffff;
+    --button-hover-bg: #3a4b7a;
+    --button-hover-text: #ffffff;
+    --popup-bg: #0a1e3a;
+    --input-bg: #152642;
+    --input-focus-bg: #1a2e4a;
+    --input-text: var(--text-color); /* Ensure input text matches general text color for contrast */
+    --input-border: rgba(255, 255, 255, 0.4);
+    --border-radius: 8px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --transition: all 0.3s ease;
+}
+
+/* AI Output Styles */
+.neoclient-ai-output {
+    background-color: var(--popup-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--border-radius);
+    padding: 10px 15px;
+    margin: 10px 0 20px 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-color);
+    max-height: 300px;
+    overflow-y: auto;
+    direction: ltr;
+    text-align: left;
+}
+
+.neoclient-ai-output.premium-required {
+    background-color: #fff3e0;
+    border: 1px solid #ffcc80;
+    color: #e65100;
+}
+
+.neoclient-ai-output h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--heading-color);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.neoclient-ai-output ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.neoclient-ai-output li {
+    margin-bottom: 5px;
+}
+
+/* Loading indicator for AI operations */
+.neoclient-ai-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: neoclient-ai-spin 1s ease-in-out infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+@keyframes neoclient-ai-spin {
+    to { transform: rotate(360deg); }
+}
+
+
+html[data-theme='day'] {
+    --bg-color: #e6f0ff;
+    --text-color: #1a1e3a;
+    --heading-color: #1a1e3a;
+    --button-bg: #4a90e2;
+    --button-text: #ffffff;
+    --button-hover-bg: #357bd8;
+    --button-hover-text: #ffffff;
+    --popup-bg: #f5f8ff;
+    --input-bg: #ffffff;
+    --input-focus-bg: #f0f5ff;
+    --input-text: var(--text-color); /* Ensure input text matches general text color for contrast */
+    --input-border: rgba(0, 0, 0, 0.4);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+html[data-theme='tabriz'] {
+    --bg-color: #e6f0ff;
+    --text-color: #1a1e3a;
+    --heading-color: #1a1e3a;
+    --button-bg: #4a90e2;
+    --button-text: #ffffff;
+    --button-hover-bg: #357bd8;
+    --button-hover-text: #ffffff;
+    --popup-bg: #f5f8ff;
+    --input-bg: #c0d8e6;
+    --input-focus-bg: #d8e5ff;
+    --input-text: var(--text-color); /* Ensure input text matches general text color for contrast */
+    --input-border: rgba(0, 0, 0, 0.4);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+html[data-theme='night'] {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --heading-color: #ffffff;
+    --button-bg: #3a3a3a;
+    --button-text: #e0e0e0;
+    --button-hover-bg: #4a4a4a;
+    --button-hover-text: #ffffff;
+    --popup-bg: #1a1a1a;
+    --input-bg: #2e2e2e;
+    --input-focus-bg: #3a3a3a;
+    --input-text: var(--text-color); /* Ensure input text matches general text color for contrast */
+    --input-border: rgba(255, 255, 255, 0.5);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+
+html[data-theme='esfahan'] {
+    --bg-color: #004d55;
+    --text-color: #e6f3f5;
+    --heading-color: #ffffff;
+    --button-bg: #00a892;
+    --button-text: #ffffff;
+    --button-hover-bg: #008c7a;
+    --button-hover-text: #ffffff;
+    --popup-bg: #003d44;
+    --input-bg: #002f38;
+    --input-focus-bg: #003d44;
+    --input-text: var(--text-color); /* Ensure input text matches general text color for contrast */
+    --input-border: rgba(255, 255, 255, 0.5);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+
+html[data-theme='qeshm'] {
+    --bg-color: #3a0a00;
+    --text-color: #f5e6e6;
+    --heading-color: #ffffff;
+    --button-bg: #e63926;
+    --button-text: #ffffff;
+    --button-hover-bg: #cc2e1e;
+    --button-hover-text: #ffffff;
+    --popup-bg: #2e0800;
+    --input-bg: #240600;
+    --input-focus-bg: #2e0800;
+    --input-text: var(--text-color); /* Ensure input text matches general text color for contrast */
+    --input-border: rgba(255, 255, 255, 0.5);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+
+html[data-theme='yazd'] {
+    --bg-color: #f5e6d3;
+    --text-color: #4a2e1a;
+    --heading-color: #4a2e1a;
+    --button-bg: #d4a373;
+    --button-text: #ffffff;
+    --button-hover-bg: #bf8c5e;
+    --button-hover-text: #ffffff;
+    --popup-bg: #f0d8c0;
+    --input-bg: #ffffff;
+    --input-focus-bg: #f5e6d3;
+    --input-text: var(--text-color); /* Ensure input text matches general text color for contrast */
+    --input-border: rgba(74, 46, 26, 0.4);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
+html[data-theme='abadan'] {
+    --bg-color: #1e3a2f;
+    --text-color: #e6f5e9;
+    --heading-color: #ffffff;
+    --button-bg: #3a7d5a;
+    --button-text: #ffffff;
+    --button-hover-bg: #2e694a;
+    --button-hover-text: #ffffff;
+    --popup-bg: #162a22;
+    --input-bg: #1e3a2f;
+    --input-focus-bg: #2e694a;
+    --input-text: var(--text-color); /* Ensure input text matches general text color for contrast */
+    --input-border: rgba(255, 255, 255, 0.5);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+
+html[data-theme='rasht'] {
+    --bg-color: #2e4a3a;
+    --text-color: #e0f0e6;
+    --heading-color: #ffffff;
+    --button-bg: #5a8c6a;
+    --button-text: #ffffff;
+    --button-hover-bg: #4a7c5a;
+    --button-hover-text: #ffffff;
+    --popup-bg: #243a2e;
+    --input-bg: #2e4a3a;
+    --input-focus-bg: #4a7c5a;
+    --input-text: var(--text-color); /* Ensure input text matches general text color for contrast */
+    --input-border: rgba(255, 255, 255, 0.5);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+
+html[data-theme='sari'] {
+    --bg-color: #3a2e4a;
+    --text-color: #f0e6f5;
+    --heading-color: #ffffff;
+    --button-bg: #7a5a8c;
+    --button-text: #ffffff;
+    --button-hover-bg: #6a4a7c;
+    --button-hover-text: #ffffff;
+    --popup-bg: #2e243a;
+    --input-bg: #3a2e4a;
+    --input-focus-bg: #6a4a7c;
+    --input-text: var(--text-color); /* Ensure input text matches general text color for contrast */
+    --input-border: rgba(255, 255, 255, 0.5);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+
+@font-face {
+    font-family: 'Vazirmatn';
+    src: url('Vazirmatn-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Vazirmatn', sans-serif;
+    direction: ltr;
+    scroll-behavior: smooth;
+}
+
+
+body {
+    overflow-x: hidden;
+    background: var(--bg-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+.neoclient-wrapper {
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background: var(--bg-color);
+    color: var(--text-color);
+    padding: 0 20px 80px 20px;
+}
+
+.neoclient-container {
+    /* This class is now primarily for styling children elements that depend on it, not for layout */
+}
+
+/* Image Upload and Cropping Styles */
+.neoclient-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 9998;
+}
+
+.neoclient-modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--popup-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    width: 90%;
+    max-width: 800px;
+    z-index: 9999;
+    direction: rtl;
+    color: var(--text-color);
+}
+
+.neoclient-modal-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--input-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.neoclient-modal-header h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--heading-color);
+}
+
+.neoclient-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.neoclient-modal-body {
+    padding: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.neoclient-modal-footer {
+    padding: 15px 20px;
+    border-top: 1px solid var(--input-border);
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.neoclient-dropdown-check-list {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.neoclient-dropdown-check-list .neoclient-dropdown-field {
+    border: 1px solid var(--input-border);
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    transition: var(--transition);
+}
+
+.neoclient-dropdown-check-list .neoclient-dropdown-list {
+    display: none;
+    position: absolute;
+    background-color: var(--popup-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--border-radius);
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    box-shadow: var(--shadow);
+}
+
+.neoclient-dropdown-check-list.open .neoclient-dropdown-list {
+    display: block;
+}
+
+.neoclient-dropdown-check-list .neoclient-checkbox-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+}
+
+
+.neoclient-dropdown-check-list .neoclient-checkbox-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* Ensure small, native checkboxes inside dropdown lists */
+.neoclient-dropdown-check-list .neoclient-dropdown-list input[type="checkbox"] {
+    appearance: auto;
+    -webkit-appearance: checkbox;
+    -moz-appearance: checkbox;
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+.neoclient-dropdown-check-list .neoclient-dropdown-list input[type="checkbox"]:checked {
+    box-shadow: none;
+}
+
+/* Remove custom pseudo checkmark for dropdown checkboxes */
+.neoclient-dropdown-check-list .neoclient-dropdown-list input[type="checkbox"]:checked::before {
+    content: none;
+}
+
+.neoclient-dropdown-list li label {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+h1,
+h2,
+h3 {
+    margin-top: 0;
+    color: var(--heading-color);
+}
+
+.neoclient-content h2,
+.neoclient-content h3 {
+    margin-top: 0;
+}
+
+/* Progress bar styles */
+.neoclient-progress-container {
+    width: 100%;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.neoclient-progress-bar {
+    height: 20px;
+    background-color: #4CAF50;
+    width: 0%;
+    transition: width 0.3s;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+}
+
+button {
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 4px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+button:hover {
+    background: var(--button-hover-bg);
+    color: var(--button-text);
+}
+
+/* Content wrapper */
+.neoclient-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-bottom: 80px;
+}
+
+/* Tab content */
+.neoclient-tab-content {
+    display: none;
+}
+
+.neoclient-tab-content.active {
+    display: block;
+}
+
+/* Main content */
+.neoclient-content {
+    flex-grow: 1;
+    padding: 20px 20px 20px 20px;
+    margin: 0;
+}
+
+/* Footer space */
+.neoclient-footer-space {
+    height: 10px;
+}
+
+/* Navigation menu */
+.neoclient-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 460px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.66);
+    padding: 10px 0;
+    border-top: 2px solid rgba(0, 0, 0, 0.99);
+    height: 70px;
+    z-index: 1000;
+}
+
+.neoclient-nav-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px;
+    color: var(--text-color);
+    transition: color 0.3s, transform 0.3s;
+}
+
+.neoclient-nav-item:hover {
+    transform: scale(1.1);
+}
+
+.neoclient-nav-item.active {
+    color: var(--heading-color);
+    transform: scale(1.1);
+}
+
+.neoclient-tab-icon {
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.neoclient-nav-item.logo .neoclient-tab-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: url('./icons/logo.gif') no-repeat center;
+    background-size: cover;
+    position: relative;
+    top: -15px;
+}
+
+/* Reconstructed neoclient.css - Icon and Button Styles */
+
+/* Icons */
+.neoclient-button-icon,
+.neoclient-action-icon {
+    width: 24px;
+    height: 24px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    transition: opacity 0.4s;
+    cursor: pointer; /* Added for pointer on hover */
+}
+
+.neoclient-button-icon:hover,
+.neoclient-action-icon:hover {
+    opacity: 0.99;
+}
+
+.neoclient-button-icon.add,
+.neoclient-action-icon.add {
+    background-image: url('./icons/add.png');
+}
+
+.neoclient-button-icon.close,
+.neoclient-action-icon.close {
+    background-image: url('./icons/close.png');
+}
+
+.neoclient-button-icon.save,
+.neoclient-action-icon.save {
+    background-image: url('./icons/save.png');
+}
+
+.neoclient-button-icon.edit,
+.neoclient-action-icon.edit {
+    background-image: url('./icons/edit.png');
+}
+
+.neoclient-button-icon.delete,
+.neoclient-action-icon.delete {
+    background-image: url('./icons/delete.png');
+}
+
+.neoclient-button-icon.view,
+.neoclient-action-icon.view {
+    background-image: url('./icons/view.png');
+}
+
+.neoclient-button-icon.login {
+    background-image: url('./icons/login.png');
+    width: 32px;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    vertical-align: middle;
+    transition: opacity 0.3s;
+}
+
+.neoclient-button-icon.register {
+    background-image: url('./icons/register.png');
+    width: 32px;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    vertical-align: middle;
+    transition: opacity 0.3s;
+}
+
+.neoclient-button-icon.logout {
+    background-image: url('./icons/logout.png');
+    width: 32px;
+    height: 32px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    vertical-align: middle;
+    transition: opacity 0.3s;
+}
+
+.neoclient-button-icon.backup,
+.neoclient-action-icon.backup {
+    background-image: url('./icons/backup.png');
+    background-color: transparent;
+}
+
+.neoclient-button-icon.restore,
+.neoclient-action-icon.restore {
+    background-image: url('./icons/restore.png');
+}
+
+.neoclient-button-icon.premium,
+.neoclient-action-icon.premium {
+    background-image: url('./icons/premium.png');
+}
+
+.neoclient-button-icon.support,
+.neoclient-action-icon.support {
+    background-image: url('./icons/support.png');
+}
+
+.neoclient-button-icon.information,
+.neoclient-action-icon.information {
+    background-image: url('./icons/information.png');
+}
+
+.neoclient-button-icon.change-password,
+.neoclient-action-icon.change-password {
+    background-image: url('./icons/change-password.png');
+}
+
+/* Charts */
+.neoclient-chart-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.neoclient-chart-col {
+    flex: 1;
+    min-width: 250px;
+    max-width: 48%;
+    background: linear-gradient(145deg, var(--popup-bg), rgba(255, 255, 255, 0.1));
+    padding: 10px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+    margin-top: 5px;
+    transform: translateZ(0);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.neoclient-chart-col:hover {
+    transform: translateZ(10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+.neoclient-chart {
+    background: linear-gradient(145deg, var(--popup-bg), rgba(255, 255, 255, 0.05));
+    padding: 15px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+    margin-bottom: 20px;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.neoclient-chart:hover {
+    transform: translateZ(15px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.neoclient-chart-container {
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    margin-top: 20px;
+    background: linear-gradient(145deg, var(--popup-bg), rgba(255, 255, 255, 0.05));
+    animation: fadeIn 1s ease-in-out;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    width: 100%;
+    overflow-x: hidden;
+    margin-bottom: 20px;
+}
+
+#skinTypeChart {
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.3));
+    transform: translateZ(5px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.neoclient-chart-card {
+    padding: 1rem;
+    flex-grow: 1;
+    min-width: 280px;
+    background: linear-gradient(145deg, var(--popup-bg), rgba(255, 255, 255, 0.05));
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    transform: translateZ(0);
+    transition: transform 0.3s ease;
+}
+
+.neoclient-chart-card:hover {
+    transform: translateZ(10px);
+}
+
+/* Kama Datepicker 3D Modern Styles */
+.bd-main {
+    background: var(--popup-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--input-border);
+    padding: 1rem;
+    width: 100%;
+    max-width: 320px;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+.bd-calendar {
+    border: none;
+}
+
+.bd-title {
+    color: var(--heading-color);
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    background-color: transparent;
+}
+
+.bd-dropdown select {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 0.8rem; /* Font size reduction for better readability */
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.bd-dropdown select:hover {
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text);
+    transform: translateY(-1px);
+}
+
+.bd-dropdown select:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+.bd-next,
+.bd-prev {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.bd-next:hover,
+.bd-prev:hover {
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text);
+    transform: translateY(-1px);
+}
+
+.bd-next:focus,
+.bd-prev:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+/* Header and Clock */
+.neoclient-header-info {
+    text-align: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ddd;
+    font-size: 1.1em;
+    color: #333;
+}
+
+#dashboard .neoclient-header-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.neoclient-header {
+    padding: 10px 20px;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#neoclient-datetime {
+    font-size: 1em;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.analog-clock {
+    width: 150px;
+    height: 150px;
+    border: 5px solid #333;
+    border-radius: 50%;
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2), inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.hand {
+    width: 50%;
+    height: 4px;
+    background: #333;
+    position: absolute;
+    top: 50%;
+    transform-origin: 100%;
+    transform: rotate(90deg);
+    transition: transform 0.5s ease-in-out;
+}
+
+.hour-hand {
+    height: 6px;
+    width: 35%;
+    left: 15%;
+}
+
+.minute-hand {
+    height: 4px;
+    width: 45%;
+    left: 5%;
+}
+
+.second-hand {
+    height: 2px;
+    background: #f00;
+    width: 48%;
+    left: 2%;
+    transition: transform 0.05s linear;
+}
+
+.center-dot {
+    width: 10px;
+    height: 10px;
+    background: #333;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.digital-date {
+    margin-top: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+#neoclient-datetime.widget {
+    background-color: var(--neoclient-widget-background-color, #f9f9f9);
+    color: var(--neoclient-widget-text-color, #333);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#neoclient-datetime.widget .analog-clock {
+    width: 50px;
+    height: 50px;
+}
+
+#neoclient-datetime.widget .digital-date {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.dashboard-date-time {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #007bff;
+    background-color: #00000000;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: fit-content;
+    margin: 10px auto;
+    position: relative;
+    top: unset;
+    right: unset;
+}
+
+/* Forms */
+.neoclient-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.neoclient-form label {
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.neoclient-form input,
+.neoclient-form select,
+.neoclient-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 14px;
+    transition: border-color 0.3s, background 0.3s, color 0.3s;
+}
+
+.neoclient-form input:focus,
+.neoclient-form select:focus,
+.neoclient-form textarea:focus {
+    border-color: #4a90e2;
+    background: var(--input-focus-bg);
+    color: var(--text-color); /* Ensure text color remains high contrast on focus */
+    outline: none;
+}
+
+.neoclient-form input[type="text"],
+.neoclient-form input[type="password"] {
+    color: white;
+}
+
+.neoclient-form input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    accent-color: var(--heading-color);
+    position: relative;
+    cursor: pointer;
+    vertical-align: middle;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: 2px solid var(--heading-color);
+    border-radius: 3px;
+    background-color: var(--input-bg);
+}
+
+.neoclient-form input[type="checkbox"]:checked {
+    background-color: var(--heading-color);
+    border-color: var(--heading-color);
+    box-shadow: 0 0 3px var(--heading-color);
+}
+
+.neoclient-form input[type="checkbox"]:checked::before {
+    content: '\2713';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 16px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.neoclient-form input[type="text"]:focus,
+.neoclient-form input[type="password"]:focus {
+    color: white;
+}
+
+.neoclient-form textarea {
+    resize: vertical;
+    min-height: 80px;
+    padding: 10px;
+}
+
+.neoclient-form input::placeholder,
+.neoclient-form textarea::placeholder {
+    color: var(--text-color); /* Ensure placeholder uses text-color for contrast */
+    opacity: 1; /* Set to 1 for maximum contrast */
+}
+
+.neoclient-form input:focus::placeholder,
+.neoclient-form textarea:focus::placeholder {
+    color: transparent; /* Hide placeholder on focus */
+}
+
+.neoclient-form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.neoclient-form input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+}
+
+/* Lists */
+.neoclient-list {
+    display: grid;
+    gap: 10px;
+}
+
+.neoclient-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 15px;
+    transition: background 0.3s;
+    max-width: 100%;
+}
+
+.neoclient-list-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.neoclient-item-info {
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.neoclient-item-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Popups */
+.neoclient-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.neoclient-popup-content {
+    background: var(--popup-bg);
+    color: var(--text-color);
+    border-radius: 12px;
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.neoclient-close-popup {
+    position: absolute;
+    color: var(--text-color);
+    top: 10px;
+    left: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.neoclient-popup-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.neoclient-action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.neoclient-popup-image {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Notification styles */
+.neoclient-notification {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    padding: 15px 20px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    z-index: 9999;
+    max-width: 300px;
+    text-align: left;
+    font-size: 0.9em;
+    line-height: 1.4;
+    border: 1px solid var(--input-border);
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    opacity: 0;
+}
+
+.neoclient-notification.success {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.neoclient-notification.error {
+    background-color: #f44336;
+    color: white;
+}
+
+.neoclient-notification.warning {
+    background-color: #ff9800;
+    color: white;
+}
+
+.neoclient-notification .close-notification {
+    background: none;
+    border: none;
+    color: inherit;
+    font-size: 1.2em;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 5px; /* Space between close button and message */
+    align-self: flex-end; /* Align to the left within the flex container */
+}
+
+.neoclient-notification .close-notification:hover {
+    color: #ccc;
+}
+
+.neoclient-notification .notification-message {
+    width: 100%;
+    text-align: left;
+}
+
+/* Buttons */
+.neoclient-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.neoclient-action-button {
+    padding: 8px 16px;
+    font-size: 13px;
+}
+
+/* Filters */
+.neoclient-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 15px 20px 15px 20px;
+}
+
+.neoclient-filter input,
+.neoclient-filter select {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* Profile actions */
+.neoclient-profile-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.neoclient-profile-action-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+
+.neoclient-profile-action-group-item {
+    flex: 1 1 calc(50% - 5px);
+    min-width: 150px;
+    box-sizing: border-box;
+}
+
+.neoclient-profile-actions .neoclient-button {
+    flex: 1 1 33px;
+    justify-content: flex-start;
+    padding: 0px;
+    font-size: 13px;
+    text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 460px) {
+    .neoclient-container {
+        width: 100%;
+    }
+
+    .neoclient-nav {
+        width: 100%;
+    }
+
+    .neoclient-popup-content {
+        width: 95%;
+    }
+
+    .neoclient-profile-action-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Popups - Form elements */
+.neoclient-popup-content .neoclient-form input,
+.neoclient-popup-content .neoclient-form select,
+.neoclient-popup-content .neoclient-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 14px;
+    transition: border-color 0.3s, background 0.3s, box-shadow 0.3s, color 0.3s;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.neoclient-popup-content .neoclient-form input:focus,
+.neoclient-popup-content .neoclient-form select:focus,
+.neoclient-popup-content .neoclient-form textarea:focus {
+    border-color: #4a90e2;
+    background: var(--input-focus-bg);
+    color: var(--text-color); /* Ensure text color remains high contrast on focus */
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    outline: none;
+}
+
+/* Profile form elements */
+#profile .neoclient-form input,
+#profile .neoclient-form select,
+#profile .neoclient-form textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--input-border);
+    border-radius: 8px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 14px;
+    transition: border-color 0.3s, background 0.3s, box-shadow 0.3s, color 0.3s;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+#profile .neoclient-form input:focus,
+#profile .neoclient-form select:focus,
+#profile .neoclient-form textarea:focus {
+    border-color: #4a90e2;
+    background: var(--input-focus-bg);
+    color: var(--text-color); /* Ensure text color remains high contrast on focus */
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+    outline: none;
+}
+
+/* Login form input styles */
+.neoclient-login-form input {
+    background: var(--input-bg);
+    color: var(--text-color); /* Ensure text color is high contrast */
+    border: 1px solid var(--input-border);
+}
+
+.neoclient-login-form input:focus {
+    background: var(--input-focus-bg);
+    color: var(--text-color); /* Ensure text color is high contrast on focus */
+    border-color: var(--input-border);
+    box-shadow: 0 0 5px rgba(106, 176, 255, 0.9);
+}
+
+/* Login form input styles for day theme */
+html[data-theme='day'] .neoclient-login-form input {
+    background: var(--input-bg);
+    color: var(--text-color); /* Ensure text color is high contrast */
+    border: 1px solid var(--input-border);
+}
+
+html[data-theme='day'] .neoclient-login-form input:focus {
+    background: var(--input-focus-bg);
+    color: var(--text-color); /* Ensure text color is high contrast on focus */
+    border-color: var(--input-border);
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+/* Login form input styles for night theme */
+html[data-theme='night'] .neoclient-login-form input {
+    background: var(--input-bg);
+    color: var(--text-color); /* Ensure text color is high contrast */
+    border: 1px solid var(--input-border);
+}
+
+html[data-theme='night'] .neoclient-login-form input:focus {
+    background: var(--input-focus-bg);
+    color: var(--text-color); /* Ensure text color is high contrast on focus */
+    border-color: var(--input-border);
+    box-shadow: 0 0 5px rgba(106, 176, 255, 0.5);
+}
+
+/* Login form input styles for esfahan theme */
+html[data-theme='esfahan'] .neoclient-login-form input {
+    background: var(--input-bg);
+    color: var(--text-color); /* Ensure text color is high contrast */
+    border: 1px solid var(--input-border);
+}
+
+html[data-theme='esfahan'] .neoclient-login-form input:focus {
+    background: var(--input-focus-bg);
+    color: var(--text-color); /* Ensure text color is high contrast on focus */
+    border-color: var(--input-border);
+    box-shadow: 0 0 5px rgba(0, 168, 146, 0.5);
+}
+
+/* Login form input styles for qeshm theme */
+html[data-theme='qeshm'] .neoclient-login-form input {
+    background: var(--input-bg);
+    color: var(--text-color); /* Ensure text color is high contrast */
+    border: 1px solid var(--input-border);
+}
+
+html[data-theme='qeshm'] .neoclient-login-form input:focus {
+    background: var(--input-focus-bg);
+    color: var(--text-color); /* Ensure text color is high contrast on focus */
+    border-color: var(--input-border);
+    box-shadow: 0 0 5px rgba(230, 57, 38, 0.5);
+}
+
+/* Login form input styles for yazd theme */
+html[data-theme='yazd'] .neoclient-login-form input {
+    background: var(--input-bg);
+    color: var(--text-color); /* Ensure text color is high contrast */
+    border: 1px solid var(--input-border);
+}
+
+html[data-theme='yazd'] .neoclient-login-form input:focus {
+    background: var(--input-focus-bg);
+    color: var(--text-color); /* Ensure text color is high contrast on focus */
+    border-color: var(--input-border);
+    box-shadow: 0 0 5px rgba(212, 163, 115, 0.5);
+}
+
+/* Login form input styles for abadan theme */
+html[data-theme='abadan'] .neoclient-login-form input {
+    background: var(--input-bg);
+    color: var(--text-color); /* Ensure text color is high contrast */
+    border: 1px solid var(--input-border);
+}
+
+html[data-theme='abadan'] .neoclient-login-form input:focus {
+    background: var(--input-focus-bg);
+    color: var(--text-color); /* Ensure text color is high contrast on focus */
+    border-color: var(--input-border);
+    box-shadow: 0 0 5px rgba(58, 125, 90, 0.5);
+}
+
+/* Login form input styles for rasht theme */
+html[data-theme='rasht'] .neoclient-login-form input {
+    background: var(--input-bg);
+    color: var(--text-color); /* Ensure text color is high contrast */
+    border: 1px solid var(--input-border);
+}
+
+html[data-theme='rasht'] .neoclient-login-form input:focus {
+    background: var(--input-focus-bg);
+    color: var(--text-color); /* Ensure text color is high contrast on focus */
+    border-color: var(--input-border);
+    box-shadow: 0 0 5px rgba(90, 140, 106, 0.5);
+}
+
+/* Login form input styles for sari theme */
+html[data-theme='sari'] .neoclient-login-form input {
+    background: var(--input-bg);
+    color: var(--text-color); /* Ensure text color is high contrast */
+    border: 1px solid var(--input-border);
+}
+
+html[data-theme='sari'] .neoclient-login-form input:focus {
+    background: var(--input-focus-bg);
+    color: var(--text-color); /* Ensure text color is high contrast on focus */
+    border-color: var(--input-border);
+    box-shadow: 0 0 5px rgba(122, 90, 140, 0.5);
+}
+
+/* Hide default calendar picker */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    display: none !important;
+    -webkit-appearance: none !important;
+}
+
+/* Quick stats */
+.neoclient-quick-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 2px;
+    margin: -100px 0 1px 0;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-item h4 {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.stat-item p {
+    margin: 0.5rem 0 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#recent-activity .neoclient-list-item {
+    border-bottom: 1px solid #eee;
+    padding: 0.75rem 0;
+}
+
+.neoclient-quick-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.neoclient-quick-actions .neoclient-button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+}
+
+.neoclient-date-time {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2em;
+    color: #333;
+    z-index: 1000;
+}
+
+/* Tab icons */
+.neoclient-tab-icon.appointment {
+    background-image: url('./icons/appointment.gif');
+}
+
+.neoclient-tab-icon.document {
+    background-image: url('./icons/document.gif');
+}
+
+.neoclient-tab-icon.reports {
+    background-image: url('./icons/reports.gif');
+}
+
+.neoclient-tab-icon.users {
+    background-image: url('./icons/users.gif');
+}
+
+/* Ensure charts are visible and have a minimum size */
+.neoclient-chart-container canvas {
+    min-height: 300px !important;
+    max-height: 400px !important;
+    width: auto !important;
+    max-width: 100% !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    margin: 0 auto 20px auto;
+}
+
+/* Styles for headings on the login page */
+.neoclient-login-form h1 {
+    font-size: 24px !important;
+    color: red !important;
+}
+
+.neoclient-login-form h2 {
+    font-size: 20px !important;
+    color: white !important;
+}
+
+.neoclient-login-form h3,
+.neoclient-login-form h4,
+.neoclient-login-form h5 {
+    color: white !important;
+}
+
+/* Ensure input text color is white for username and password fields in login form */
+.neoclient-login-form input[type="text"],
+.neoclient-login-form input[type="password"] {
+    color: white !important;
+}
+
+.neoclient-login-form input[type="text"]:focus,
+.neoclient-login-form input[type="password"]:focus {
+    color: white !important;
+}
